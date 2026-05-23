@@ -789,6 +789,38 @@ body::before {
   padding: 1.1em 3em;
 }
 
+/* Estado cerrado */
+.rsvp__card--closed {
+  border-color: rgba(197, 160, 89, 0.2);
+}
+.rsvp__card--closed:hover {
+  transform: none;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.06),
+    0 2px 8px rgba(197, 160, 89, 0.06);
+}
+.rsvp__card-icon--closed {
+  color: var(--color-gold);
+  opacity: 0.7;
+}
+.rsvp__card-text--closed {
+  font-style: italic;
+  line-height: 2;
+  max-width: 32rem;
+  margin: 0 auto var(--space-xl) auto;
+}
+.rsvp__card-signature {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.9;
+  margin: 0;
+}
+.rsvp__card-signature em {
+  font-size: 1.15rem;
+  color: var(--color-gold);
+}
+
 /* --- 14. MODAL: Ventanas emergentes --- */
 
 /* --- ZELLE: Información de pago dentro del modal --- */
