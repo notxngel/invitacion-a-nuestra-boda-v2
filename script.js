@@ -699,3 +699,4 @@ function cerrarYReiniciar() {
     el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
   });
 })();
+

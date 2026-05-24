@@ -215,84 +215,86 @@
                 <p class="section-header__subtitle" data-i18n="details_subtitle">Todo lo que necesitas saber</p>
             </div>
 
-            <div class="faq fade-up">
-                <!-- Pregunta 1 -->
-                <details class="faq__item">
-                    <summary class="faq__question">
-                        <span data-i18n="faq_q_arrival">¿A qué hora debo llegar?</span>
-                        <svg class="faq__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </summary>
-                    <div class="faq__answer">
-                        <p data-i18n="faq_a_arrival">La ceremonia comenzará puntualmente a las 5:00 PM. Sin embargo, les agradeceríamos llegar a las 4:30 PM para que podamos comenzar con la celebración de forma organizada.</p>
-                    </div>
-                </details>
+            <div class="faq-grid fade-up">
 
-                <!-- Pregunta 2 -->
-                <details class="faq__item">
-                    <summary class="faq__question">
-                        <span data-i18n="faq_q_parking">¿Hay estacionamiento?</span>
-                        <svg class="faq__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M19 9l-7 7-7-7" />
+                <!-- Card: Niños (Importante) -->
+                <div class="faq-card faq-card--important">
+                    <div class="faq-card__icon-wrap" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="7" r="4"/>
+                            <path d="M6 21v-2a4 4 0 0 1 4-4h3"/>
+                            <line x1="17" y1="14" x2="22" y2="19"/>
+                            <line x1="22" y1="14" x2="17" y2="19"/>
                         </svg>
-                    </summary>
-                    <div class="faq__answer">
-                        <p data-i18n="faq_a_parking">¡Sí! El Garden Vista Ballroom cuenta con servicio de Valet Parking gratuito para todos nuestros invitados para su mayor comodidad.</p>
                     </div>
-                </details>
+                    <p class="faq-card__label">¡Importante!</p>
+                    <h3 class="faq-card__question" data-i18n="faq_q_kids">¿Puedo llevar niños?</h3>
+                    <p class="faq-card__answer" data-i18n="faq_a_kids">Evento exclusivo para adultos.</p>
+                </div>
 
-                <!-- Pregunta 3 -->
-                <details class="faq__item">
-                    <summary class="faq__question">
-                        <span data-i18n="faq_q_kids">¿Puedo llevar niños?</span>
-                        <svg class="faq__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M19 9l-7 7-7-7" />
+                <!-- Card: Dress Code (Importante) -->
+                <div class="faq-card faq-card--important">
+                    <div class="faq-card__icon-wrap" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/>
                         </svg>
-                    </summary>
-                    <div class="faq__answer">
-                        <p data-i18n="faq_a_kids">Adoramos a sus pequeños, pero hemos decidido tener una celebración exclusiva para adultos. ¡Esperamos que puedan disfrutar de una noche de fiesta con nosotros!</p>
                     </div>
-                </details>
+                    <p class="faq-card__label">¡Importante!</p>
+                    <h3 class="faq-card__question" data-i18n="faq_q_dresscode">¿Cuál es el código de vestimenta?</h3>
+                    <p class="faq-card__answer" data-i18n="faq_a_dresscode">Formal · Evitar blanco (novia) y verde oliva (cortejo).</p>
+                </div>
 
-                <!-- Pregunta 4 -->
-                <details class="faq__item">
-                    <summary class="faq__question">
-                        <span data-i18n="faq_q_dresscode">¿Cuál es el código de vestimenta?</span>
-                        <svg class="faq__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M19 9l-7 7-7-7" />
+                <!-- Card: Llegada -->
+                <div class="faq-card faq-card--important">
+                    <div class="faq-card__icon-wrap" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
                         </svg>
-                    </summary>
-                    <div class="faq__answer">
-                        <p data-i18n="faq_a_dresscode">Formal. Les pedimos amablemente evitar el color blanco (reservado para la novia) y el verde oliva (reservado para nuestro cortejo).</p>
                     </div>
-                </details>
+                    <p class="faq-card__label">¡Importante!</p>
+                    <h3 class="faq-card__question" data-i18n="faq_q_arrival">¿A qué hora debo llegar?</h3>
+                    <p class="faq-card__answer" data-i18n="faq_a_arrival">4:30 PM · La ceremonia inicia puntualmente a las 5:00 PM.</p>
+                </div>
 
-                <!-- Pregunta 5 -->
-                <details class="faq__item">
-                    <summary class="faq__question">
-                        <span data-i18n="faq_q_gifts">¿Tienen mesa de regalos?</span>
-                        <svg class="faq__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M19 9l-7 7-7-7" />
+                <!-- Card: Estacionamiento -->
+                <div class="faq-card">
+                    <div class="faq-card__icon-wrap" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="1" y="3" width="15" height="13" rx="2"/>
+                            <path d="M16 8h4l3 4v4h-7V8z"/>
+                            <circle cx="5.5" cy="18.5" r="2.5"/>
+                            <circle cx="18.5" cy="18.5" r="2.5"/>
                         </svg>
-                    </summary>
-                    <div class="faq__answer">
-                        <p data-i18n="faq_a_gifts">Si deseas tener un detalle con nosotros, tendremos una 'Lluvia de Sobres' el día del evento.</p>
                     </div>
-                </details>
+                    <h3 class="faq-card__question" data-i18n="faq_q_parking">¿Hay estacionamiento?</h3>
+                    <p class="faq-card__answer" data-i18n="faq_a_parking">Sí, Valet Parking gratuito para todos los invitados.</p>
+                </div>
 
-                <!-- Pregunta 6 -->
-                <details class="faq__item">
-                    <summary class="faq__question">
-                        <span data-i18n="faq_q_seats">¿Cómo funcionan los cupos?</span>
-                        <svg class="faq__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M19 9l-7 7-7-7" />
+                <!-- Card: Regalos -->
+                <div class="faq-card">
+                    <div class="faq-card__icon-wrap" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
                         </svg>
-                    </summary>
-                    <div class="faq__answer">
-                        <p data-i18n="faq_a_seats">Hemos reservado un número específico de asientos para cada invitación. Al ingresar tu nombre en el formulario de confirmación, podrás ver tus cupos asignados.</p>
                     </div>
-                </details>
+                    <h3 class="faq-card__question" data-i18n="faq_q_gifts">¿Tienen mesa de regalos?</h3>
+                    <p class="faq-card__answer" data-i18n="faq_a_gifts">Tendremos una Lluvia de Sobres el día del evento.</p>
+                </div>
+
+                <!-- Card: Cupos -->
+                <div class="faq-card">
+                    <div class="faq-card__icon-wrap" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v2z"/>
+                            <line x1="9" y1="12" x2="15" y2="12"/>
+                        </svg>
+                    </div>
+                    <h3 class="faq-card__question" data-i18n="faq_q_seats">¿Cómo funcionan los cupos?</h3>
+                    <p class="faq-card__answer" data-i18n="faq_a_seats">Cada invitación tiene cupos asignados. Los verás al confirmar.</p>
+                </div>
+
             </div>
         </div>
     </section>
