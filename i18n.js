@@ -33,7 +33,7 @@ const I18N = {
     caption_6: "Mi lugar favorito",
 
     // Details (Now FAQ)
-    details_title: "Preguntas Frecuentes",
+    details_title: "Detalles del Evento",
     details_subtitle: "Todo lo que necesitas saber",
     faq_q_arrival: "¿A qué hora debo llegar?",
     faq_a_arrival: "4:30 PM · La ceremonia inicia puntualmente a las 5:00 PM.",
@@ -149,7 +149,7 @@ const I18N = {
     caption_6: "My favorite place",
 
     // Details (FAQ)
-    details_title: "Frequently Asked Questions",
+    details_title: "Event Details",
     details_subtitle: "Everything you need to know",
     faq_q_arrival: "What time should I arrive?",
     faq_a_arrival: "4:30 PM · Ceremony starts promptly at 5:00 PM.",
