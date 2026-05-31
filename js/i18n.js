@@ -1,6 +1,8 @@
-/** i18n — Soporte bilingüe (ES por defecto, EN con ?lang=en) **/
+/** i18n — Soporte bilingüe (ES por defecto, EN con localStorage o ?lang=en) **/
 
 const LANG = (() => {
+  const stored = localStorage.getItem("lang");
+  if (stored === "en" || stored === "es") return stored;
   const params = new URLSearchParams(window.location.search);
   return params.get("lang") === "en" ? "en" : "es";
 })();
@@ -282,3 +284,20 @@ function applyTranslations() {
 
 // Ejecutar traducciones al cargar
 applyTranslations();
+
+// Inicializar el botón de idioma
+(function initLangToggle() {
+  const btn = document.getElementById("lang-toggle");
+  if (!btn) return;
+
+  // Marcar la opción activa
+  btn.querySelectorAll("[data-lang-opt]").forEach(el => {
+    el.classList.toggle("is-active", el.dataset.langOpt === LANG);
+  });
+
+  btn.addEventListener("click", () => {
+    const next = LANG === "es" ? "en" : "es";
+    localStorage.setItem("lang", next);
+    location.reload();
+  });
+})();

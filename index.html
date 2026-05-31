@@ -49,7 +49,7 @@
             rel="stylesheet">
     </noscript>
     <!-- Estilos -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -59,16 +59,28 @@
     <!-- Sección: Navbar -->
     <nav class="navbar" aria-label="Navegación principal">
         <div class="navbar__container">
-            <!-- Botón Hamburguesa -->
-            <button class="navbar__menu-btn" aria-label="Abrir menú" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <!-- Fila superior: controles -->
+            <div class="navbar__row">
+                <button class="navbar__menu-btn" aria-label="Abrir menú" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
 
-            <!-- Monograma Central -->
-            <a href="#home" class="navbar__logo" aria-label="Ir al inicio - Angel y Clara">Angel <span class="navbar__logo-amp">&amp;</span> Clara</a>
-            
+                <a href="#home" class="navbar__logo" aria-label="Ir al inicio - Angel y Clara">Angel <span class="navbar__logo-amp">&amp;</span> Clara</a>
+
+                <button id="lang-toggle" class="navbar__lang-btn" aria-label="Cambiar idioma / Change language">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="2" y1="12" x2="22" y2="12"/>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    </svg>
+                    <span class="navbar__lang-opt" data-lang-opt="es">ES</span>
+                    <span class="navbar__lang-sep" aria-hidden="true">·</span>
+                    <span class="navbar__lang-opt" data-lang-opt="en">EN</span>
+                </button>
+            </div>
+
             <!-- Menú Desplegable -->
             <ul class="navbar__menu" role="list">
                 <li><a href="#home" class="navbar__link" data-i18n="nav_home">Inicio</a></li>
@@ -149,7 +161,7 @@
                     <!-- Polaroid 1: La gran pregunta -->
                     <article class="polaroid">
                         <div class="polaroid__frame">
-                            <img src="images/theMoment.webp" alt="La gran pregunta del momento de la propuesta"
+                            <img src="assets/theMoment.webp" alt="La gran pregunta del momento de la propuesta"
                                 loading="lazy" class="polaroid__img">
                             <p class="polaroid__caption" data-i18n="caption_1">La gran pregunta</p>
                         </div>
@@ -158,7 +170,7 @@
                     <!-- Polaroid 2: Dijo que sí -->
                     <article class="polaroid">
                         <div class="polaroid__frame">
-                            <img src="images/dijoquesi.webp" alt="Clara dijo que sí a la propuesta" loading="lazy"
+                            <img src="assets/dijoquesi.webp" alt="Clara dijo que sí a la propuesta" loading="lazy"
                                 class="polaroid__img">
                             <p class="polaroid__caption" data-i18n="caption_2">¡Dijo que sí!</p>
                         </div>
@@ -167,7 +179,7 @@
                     <!-- Polaroid 3: Nosotros (CENTRO) -->
                     <article class="polaroid">
                         <div class="polaroid__frame">
-                            <img src="images/Us.webp" alt="Angel y Clara juntos" loading="lazy" class="polaroid__img">
+                            <img src="assets/Us.webp" alt="Angel y Clara juntos" loading="lazy" class="polaroid__img">
                             <p class="polaroid__caption" data-i18n="caption_3">Tú y yo, siempre</p>
                         </div>
                     </article>
@@ -175,7 +187,7 @@
                     <!-- Polaroid 4: Promesa -->
                     <article class="polaroid">
                         <div class="polaroid__frame">
-                            <img src="images/proposalimg2.webp" alt="Promesa eterna de amor" loading="lazy"
+                            <img src="assets/proposalimg2.webp" alt="Promesa eterna de amor" loading="lazy"
                                 class="polaroid__img">
                             <p class="polaroid__caption" data-i18n="caption_4">Para siempre</p>
                         </div>
@@ -183,7 +195,7 @@
                     <!-- Polaroid 6: Amor -->
                     <article class="polaroid">
                         <div class="polaroid__frame">
-                            <img src="images/ilove.webp" alt="Con todo mi amor" loading="lazy" class="polaroid__img">
+                            <img src="assets/ilove.webp" alt="Con todo mi amor" loading="lazy" class="polaroid__img">
                             <p class="polaroid__caption" data-i18n="caption_5">Con todo mi corazón</p>
                         </div>
                     </article>
@@ -191,7 +203,7 @@
                     <!-- Polaroid 7: Juntos -->
                     <article class="polaroid">
                         <div class="polaroid__frame">
-                            <img src="images/us2.webp" alt="Juntos es mi lugar favorito" loading="lazy"
+                            <img src="assets/us2.webp" alt="Juntos es mi lugar favorito" loading="lazy"
                                 class="polaroid__img">
                             <p class="polaroid__caption" data-i18n="caption_6">Mi lugar favorito</p>
                         </div>
@@ -495,9 +507,9 @@
     <div class="custom-cursor"></div>
 
     <!-- JavaScript -->
-    <script src="config.js"></script>
-    <script src="i18n.js"></script>
-    <script src="script.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>
