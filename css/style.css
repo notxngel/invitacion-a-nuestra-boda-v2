@@ -448,12 +448,17 @@ body::before {
 /* --- 7. HERO --- */
 .hero {
   position: relative;
-  min-height: 100dvh;
+  /* svh = static viewport height: no rebota al mostrar/ocultar la barra del navegador */
+  min-height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--color-white);
   overflow: hidden;
+  /* Bordes redondeados inferiores + sombra para efecto "encima de la página" */
+  border-radius: 0 0 2.5rem 2.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  z-index: 1;
 }
 
 .hero__background {
