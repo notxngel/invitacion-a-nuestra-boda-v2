@@ -207,24 +207,26 @@ body::before {
 /* --- 6. NAVBAR (mobile-first) --- */
 .navbar {
   position: fixed;
-  top: 0.9rem;
+  top: 0.85rem;
   left: 50%;
-  transform: translate(-50%, -20px);
-  width: 92%;
-  max-width: 620px;
-  background-color: rgba(253, 249, 244, 0.82);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(168, 127, 59, 0.35);
+  transform: translate(-50%, -16px);
+  width: 90%;
+  max-width: 600px;
+  background-color: rgba(253, 249, 244, 0.78);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(168, 127, 59, 0.28);
   border-radius: 100px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08),
-    0 2px 8px rgba(168, 127, 59, 0.12);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.07),
+    0 1px 6px rgba(168, 127, 59, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
   z-index: var(--z-nav);
-  padding: 0.45rem 0.9rem;
+  padding: 0;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s ease, transform 0.4s ease, border-radius 0.35s ease,
-    background-color 0.35s ease, width 0.35s ease;
+  transition: opacity 0.4s ease, transform 0.4s ease,
+    border-radius 0.35s ease, background-color 0.35s ease;
 }
 
 .navbar.is-visible {
@@ -234,11 +236,13 @@ body::before {
 }
 
 .navbar.is-open {
-  border-radius: 20px;
+  border-radius: 22px;
   background-color: rgba(253, 249, 244, 0.97);
-  border-color: rgba(168, 127, 59, 0.25);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1),
-    0 2px 8px rgba(168, 127, 59, 0.15);
+  border-color: rgba(168, 127, 59, 0.22);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.1),
+    0 2px 8px rgba(168, 127, 59, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 .navbar__container {
@@ -247,45 +251,54 @@ body::before {
   width: 100%;
 }
 
-/* Fila superior: hamburguesa · logo · idioma */
+/* ── Fila principal: tres zonas perfectamente alineadas ── */
 .navbar__row {
   display: grid;
-  grid-template-columns: 40px 1fr 40px;
+  grid-template-columns: 44px 1fr 44px;
   align-items: center;
   width: 100%;
-  min-height: 40px;
-  gap: 0.25rem;
+  height: 46px;
+  padding: 0 0.6rem;
 }
 
-/* Botón Hamburguesa */
+/* ── Botón Hamburguesa ── */
 .navbar__menu-btn {
   background: none;
   border: none;
   cursor: pointer;
+  width: 34px;
+  height: 34px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   gap: 5px;
-  padding: 8px;
-  z-index: 10;
+  border-radius: 50%;
+  transition: background var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.navbar__menu-btn:hover {
+  background: rgba(168, 127, 59, 0.08);
 }
 
 .navbar__menu-btn span {
   display: block;
   height: 1.5px;
   background-color: var(--color-dark);
-  transition: var(--transition-base);
+  transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
   border-radius: 2px;
+  transform-origin: center;
 }
 
-.navbar__menu-btn span:nth-child(1) { width: 20px; }
-.navbar__menu-btn span:nth-child(2) { width: 14px; opacity: 0.65; }
-.navbar__menu-btn span:nth-child(3) { width: 18px; }
+.navbar__menu-btn span:nth-child(1) { width: 18px; }
+.navbar__menu-btn span:nth-child(2) { width: 12px; opacity: 0.5; }
+.navbar__menu-btn span:nth-child(3) { width: 16px; }
 
 .navbar__menu-btn[aria-expanded="true"] span:nth-child(1) {
+  width: 18px;
   transform: translateY(6.5px) rotate(45deg);
-  width: 20px;
+  opacity: 1;
 }
 
 .navbar__menu-btn[aria-expanded="true"] span:nth-child(2) {
@@ -294,36 +307,82 @@ body::before {
 }
 
 .navbar__menu-btn[aria-expanded="true"] span:nth-child(3) {
+  width: 18px;
   transform: translateY(-6.5px) rotate(-45deg);
-  width: 20px;
+  opacity: 1;
 }
 
-/* Logo */
+/* ── Logo central ── */
 .navbar__logo {
   font-family: var(--font-names);
   font-weight: 400;
-  font-size: 1.55rem;
+  font-size: 1.5rem;
   color: var(--color-gold);
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
   line-height: 1;
-  transition: opacity 0.3s ease;
   white-space: nowrap;
-  pointer-events: none;
   overflow: hidden;
+  pointer-events: none;
+  letter-spacing: 0.01em;
+  transition: opacity 0.3s ease;
 }
 
 .navbar__logo-amp {
   font-family: var(--font-serif);
-  font-size: 0.85rem;
-  margin: 0 0.35rem;
+  font-size: 0.78rem;
+  margin: 0 0.3rem;
   color: var(--color-dark);
-  opacity: 0.7;
+  opacity: 0.55;
+  font-weight: 400;
 }
 
-/* Menú desplegable */
+/* ── Botón de idioma — minimalista, solo texto ── */
+.navbar__lang-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  background: transparent;
+  border: 1px solid rgba(168, 127, 59, 0.3);
+  border-radius: 100px;
+  padding: 0.22rem 0.5rem;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  transition: background var(--transition-fast),
+    border-color var(--transition-fast), color var(--transition-fast);
+  flex-shrink: 0;
+  justify-self: end;
+  white-space: nowrap;
+}
+
+.navbar__lang-btn:hover {
+  background: rgba(168, 127, 59, 0.08);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+.navbar__lang-sep {
+  color: rgba(168, 127, 59, 0.3);
+  font-weight: 300;
+  font-size: 0.55rem;
+}
+
+.navbar__lang-opt {
+  transition: color var(--transition-fast);
+}
+
+.navbar__lang-opt.is-active {
+  color: var(--color-gold);
+}
+
+/* ── Menú desplegable ── */
 .navbar__menu {
   list-style: none;
   margin: 0;
@@ -332,29 +391,30 @@ body::before {
   overflow: hidden;
   max-height: 0;
   opacity: 0;
-  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.3s ease;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
   pointer-events: none;
 }
 
 .navbar.is-open .navbar__menu {
-  max-height: 220px;
+  max-height: 240px;
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Separador ornamental */
+/* Separador dorado ornamental */
 .navbar.is-open .navbar__menu::before {
   content: "";
   display: block;
   height: 1px;
   background: linear-gradient(
     to right,
-    transparent,
-    rgba(168, 127, 59, 0.3),
-    transparent
+    transparent 0%,
+    rgba(168, 127, 59, 0.25) 30%,
+    rgba(168, 127, 59, 0.4) 50%,
+    rgba(168, 127, 59, 0.25) 70%,
+    transparent 100%
   );
-  margin: 0.35rem 0.5rem 0.5rem;
+  margin: 0.1rem 1.5rem 0.4rem;
 }
 
 .navbar__menu li {
@@ -364,16 +424,16 @@ body::before {
 .navbar__link {
   display: block;
   text-decoration: none;
-  color: var(--color-text-main);
+  color: var(--color-text-muted);
   font-family: var(--font-sans);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  padding: 0.6rem 1rem;
+  padding: 0.55rem 1rem;
   text-transform: uppercase;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.28em;
   transition: color var(--transition-base), background-color var(--transition-base);
   border-radius: 100px;
-  margin: 0.1rem 0.4rem;
+  margin: 0 1rem;
 }
 
 .navbar__link:hover {
@@ -382,52 +442,7 @@ body::before {
 }
 
 .navbar__menu li:last-child .navbar__link {
-  margin-bottom: 0.5rem;
-}
-
-/* Botón de idioma */
-.navbar__lang-btn {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.25rem;
-  background: rgba(168, 127, 59, 0.07);
-  border: 1px solid rgba(168, 127, 59, 0.38);
-  border-radius: 100px;
-  padding: 0.28rem 0.55rem;
-  cursor: pointer;
-  font-family: var(--font-sans);
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--color-text-muted);
-  transition: background-color var(--transition-fast),
-    border-color var(--transition-fast);
-  flex-shrink: 0;
-  margin-left: auto;
-}
-
-.navbar__lang-btn:hover {
-  background: rgba(168, 127, 59, 0.14);
-  border-color: var(--color-gold);
-}
-
-.navbar__lang-btn svg {
-  color: var(--color-gold);
-  flex-shrink: 0;
-}
-
-.navbar__lang-sep {
-  color: rgba(168, 127, 59, 0.35);
-  font-weight: 300;
-}
-
-.navbar__lang-opt {
-  transition: color var(--transition-fast);
-}
-
-.navbar__lang-opt.is-active {
-  color: var(--color-gold);
+  margin-bottom: 0.55rem;
 }
 
 /* --- 7. HERO --- */
@@ -1433,24 +1448,24 @@ body::before {
 
   /* --- Navbar --- */
   .navbar {
-    top: 0.75rem;
-    width: 94%;
-    padding: 0.4rem 0.85rem;
+    top: 0.7rem;
+    width: 93%;
   }
 
   .navbar__row {
-    grid-template-columns: 36px 1fr 36px;
-    min-height: 38px;
+    grid-template-columns: 40px 1fr 40px;
+    height: 44px;
+    padding: 0 0.5rem;
   }
 
   .navbar__logo {
-    font-size: 1.35rem;
+    font-size: 1.4rem;
   }
 
   .navbar__link {
-    font-size: 0.7rem;
-    padding: 0.55rem 0.8rem;
-    letter-spacing: 0.2em;
+    font-size: 0.68rem;
+    padding: 0.5rem 0.8rem;
+    letter-spacing: 0.24em;
   }
 
   /* --- Hero --- */
@@ -1534,22 +1549,24 @@ body::before {
    ======================================== */
 @media (max-width: 390px) {
   .navbar {
-    width: 96%;
-    padding: 0.38rem 0.75rem;
+    width: 95%;
+    top: 0.6rem;
   }
 
   .navbar__row {
-    grid-template-columns: 34px 1fr 34px;
-    min-height: 36px;
+    grid-template-columns: 38px 1fr 38px;
+    height: 42px;
+    padding: 0 0.4rem;
   }
 
   .navbar__logo {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
 
   .navbar__lang-btn {
-    padding: 0.24rem 0.44rem;
-    font-size: 0.58rem;
+    padding: 0.2rem 0.42rem;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
   }
 
   .hero__eyebrow {
@@ -1657,15 +1674,21 @@ body::before {
 
   .navbar {
     top: 1.5rem;
-    padding: 0.6rem 1.5rem;
   }
 
   .navbar__row {
     grid-template-columns: 1fr auto 1fr;
+    height: 50px;
+    padding: 0 1rem;
   }
 
   .navbar__logo {
-    font-size: 1.8rem;
+    font-size: 1.85rem;
+  }
+
+  .navbar__lang-btn {
+    font-size: 0.63rem;
+    padding: 0.28rem 0.6rem;
   }
 
   .navbar__menu {
