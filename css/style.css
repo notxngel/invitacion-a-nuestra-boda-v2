@@ -452,7 +452,6 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 4rem;
   color: var(--color-white);
   overflow: hidden;
 }
@@ -460,24 +459,29 @@ body::before {
 .hero__background {
   position: absolute;
   inset: 0;
-  background: url("../assets/hero_wedding_olive.webp") center / cover;
-  mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-  filter: brightness(0.55);
+  background: url("../assets/hero_wedding_olive.webp") center 30% / cover;
+  filter: brightness(0.52);
   z-index: var(--z-back);
 }
 
-/* Capa de gradiente sutil */
+/* Gradiente: sombra en top (para navbar) y fade en bottom (hacia secciones) */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(30, 40, 28, 0.55) 0%, transparent 28%),
+    linear-gradient(to top,    rgba(30, 40, 28, 0.7)  0%, transparent 45%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Capa de viñeta lateral para profundidad */
 .hero::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(65, 83, 59, 0.15) 0%,
-    transparent 50%,
-    rgba(45, 58, 41, 0.3) 100%
-  );
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(20, 28, 18, 0.35) 100%);
   z-index: 0;
   pointer-events: none;
 }
@@ -485,38 +489,59 @@ body::before {
 .hero__content {
   text-align: center;
   z-index: var(--z-elevated);
-  padding: 1em 1.5em;
-  padding-bottom: 6rem;
-  letter-spacing: 0.04rem;
+  padding: 5.5rem 1.75rem 7rem;
+  max-width: 54rem;
+  width: 100%;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* ── Eyebrow con líneas ornamentales ── */
 .hero__eyebrow {
-  font-size: 0.75rem;
-  letter-spacing: 0.45em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  font-family: var(--font-sans);
+  font-size: 0.58rem;
+  letter-spacing: 0.55em;
   text-transform: uppercase;
-  margin-bottom: 1.2em;
-  opacity: 0.88;
   font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1.6rem;
+  padding-left: 0.55em; /* compensa letter-spacing visual */
 }
 
+.hero__eyebrow::before,
+.hero__eyebrow::after {
+  content: "";
+  flex: 0 0 2rem;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* ── Título principal ── */
 .hero__title {
   font-family: var(--font-names);
-  font-size: clamp(3.8rem, 12vw, 8rem);
-  margin: 0 0 var(--space-lg);
+  font-size: clamp(4rem, 13vw, 7rem);
+  margin: 0 0 0.15em;
   font-weight: 400;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-  line-height: 0.95;
+  text-shadow: 0 4px 28px rgba(0, 0, 0, 0.35);
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
-/* Divisor ornamental: líneas + diamante central */
+/* ── Divisor ornamental: líneas + rombo hueco ── */
 .hero__divider {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  margin: 0 auto var(--space-xl);
-  width: 14rem;
+  gap: 1rem;
+  margin: 0.6rem auto 1.8rem;
+  width: 18rem;
 }
 
 .hero__divider::before,
@@ -524,86 +549,124 @@ body::before {
   content: "";
   flex: 1;
   height: 1px;
-  background: rgba(255, 255, 255, 0.45);
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.45));
 }
 
-/* Pequeño ornamento central en el divisor */
+.hero__divider::after {
+  background: linear-gradient(to left, transparent, rgba(255, 255, 255, 0.45));
+}
+
+/* Rombo hueco — más visible y elegante */
 .hero__divider-gem {
-  width: 5px;
-  height: 5px;
-  background: rgba(255, 255, 255, 0.7);
+  width: 7px;
+  height: 7px;
+  border: 1.5px solid rgba(255, 255, 255, 0.65);
+  background: transparent;
   transform: rotate(45deg);
   flex-shrink: 0;
 }
 
+/* ── Bloque de detalles ── */
 .hero__details {
-  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
 }
 
+/* ── Fecha ── */
 .hero__date {
   font-family: var(--font-serif);
-  font-size: clamp(1.4rem, 4.5vw, 3rem);
-  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(1.3rem, 3.8vw, 2.6rem);
+  color: rgba(255, 255, 255, 0.93);
   margin: 0;
   font-weight: 400;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.18em;
+  padding-left: 0.18em;
 }
 
-.hero__instruction {
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.65);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin-top: 1.2em;
+/* ── Lugar del evento ── */
+.hero__venue {
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
   font-weight: 300;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0.6rem 0 0;
+  padding-left: 0.3em;
 }
 
+/* ── Instrucción de scroll ── */
+.hero__instruction {
+  font-size: 0.58rem;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-top: 0.6rem;
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* ── Scroll indicator ── */
 .hero__scroll-indicator {
   position: absolute;
-  bottom: var(--space-lg);
+  bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  animation: bounce 2.2s ease-in-out infinite;
-  color: rgba(255, 255, 255, 0.7);
+  animation: bounce 2.4s ease-in-out infinite;
+  color: rgba(255, 255, 255, 0.5);
   z-index: var(--z-elevated);
 }
 
-/* --- 8. COUNTDOWN --- */
+/* --- 8. COUNTDOWN — estilo editorial sin cajas ── */
 .countdown {
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: var(--space-md);
-  margin-top: var(--space-xl);
+  margin-top: 2.4rem;
 }
 
 .countdown__item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 3.5rem;
-  padding: 0.6rem 0.75rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius-md);
-  backdrop-filter: blur(8px);
+  padding: 0 1.4rem;
+  position: relative;
+  background: none;
+  border: none;
+  border-radius: 0;
+  backdrop-filter: none;
+}
+
+/* Separador vertical delgado entre items */
+.countdown__item + .countdown__item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.3rem;
+  bottom: 0.3rem;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.18);
 }
 
 .countdown__number {
   display: block;
   font-family: var(--font-serif);
   font-weight: 700;
-  font-size: clamp(1.4rem, 5vw, 2.8rem);
+  font-size: clamp(1.8rem, 6vw, 3.2rem);
   line-height: 1;
   color: var(--color-white);
 }
 
 .countdown__label {
-  font-size: 0.6rem;
+  font-size: 0.5rem;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  margin-top: 0.3em;
-  color: rgba(255, 255, 255, 0.72);
+  letter-spacing: 0.28em;
+  margin-top: 0.4em;
+  color: rgba(255, 255, 255, 0.5);
   font-weight: 300;
+  padding-left: 0.28em;
 }
 
 /* --- 9. ALBUM --- */
@@ -1469,45 +1532,52 @@ body::before {
   }
 
   /* --- Hero --- */
-  .hero {
-    min-height: 100dvh;
-    padding: 5rem 0 2.5rem;
-  }
-
   .hero__content {
-    padding: 0.75em 1em;
-    padding-bottom: 5rem;
+    padding: 5rem 1.25rem 6.5rem;
   }
 
   .hero__eyebrow {
-    font-size: 0.65rem;
-    letter-spacing: 0.4em;
+    font-size: 0.55rem;
+    letter-spacing: 0.45em;
+    margin-bottom: 1.3rem;
+  }
+
+  .hero__eyebrow::before,
+  .hero__eyebrow::after {
+    flex: 0 0 1.2rem;
   }
 
   .hero__title {
-    line-height: 1;
-    margin-bottom: var(--space-md);
+    font-size: clamp(3.6rem, 13vw, 5.5rem);
+    margin-bottom: 0.1em;
+  }
+
+  .hero__divider {
+    width: 14rem;
+    margin-bottom: 1.4rem;
   }
 
   .hero__date {
-    font-size: clamp(1.5rem, 8vw, 2.5rem);
-    letter-spacing: 0.05em;
+    font-size: clamp(1.25rem, 5.5vw, 2rem);
+    letter-spacing: 0.14em;
   }
 
   /* --- Countdown --- */
   .countdown {
-    gap: 0.4rem;
-    margin-top: var(--space-lg);
+    margin-top: 2rem;
   }
 
   .countdown__item {
-    min-width: 3rem;
-    padding: 0.5rem 0.6rem;
+    padding: 0 1rem;
+  }
+
+  .countdown__number {
+    font-size: clamp(1.7rem, 7vw, 2.5rem);
   }
 
   .countdown__label {
-    font-size: 0.55rem;
-    letter-spacing: 0.12em;
+    font-size: 0.48rem;
+    letter-spacing: 0.22em;
   }
 
   /* --- Album --- */
@@ -1569,33 +1639,49 @@ body::before {
     letter-spacing: 0.1em;
   }
 
+  .hero__content {
+    padding: 4.8rem 1rem 6rem;
+  }
+
   .hero__eyebrow {
-    font-size: 0.6rem;
+    font-size: 0.5rem;
+    letter-spacing: 0.4em;
+    gap: 0.6rem;
+  }
+
+  .hero__eyebrow::before,
+  .hero__eyebrow::after {
+    flex: 0 0 0.8rem;
   }
 
   .hero__title {
-    font-size: clamp(3rem, 14vw, 4.5rem);
+    font-size: clamp(3.2rem, 14vw, 4.5rem);
+  }
+
+  .hero__divider {
+    width: 11rem;
   }
 
   .hero__date {
-    font-size: clamp(1.2rem, 7vw, 2rem);
+    font-size: clamp(1.1rem, 6.5vw, 1.8rem);
+    letter-spacing: 0.12em;
   }
 
   .countdown {
-    gap: 0.3rem;
+    margin-top: 1.6rem;
   }
 
   .countdown__item {
-    min-width: 2.6rem;
-    padding: 0.4rem 0.5rem;
+    padding: 0 0.75rem;
   }
 
   .countdown__number {
-    font-size: clamp(1.3rem, 7vw, 2rem);
+    font-size: clamp(1.5rem, 8vw, 2.2rem);
   }
 
   .countdown__label {
-    font-size: 0.5rem;
+    font-size: 0.44rem;
+    letter-spacing: 0.2em;
   }
 
   .polaroid {

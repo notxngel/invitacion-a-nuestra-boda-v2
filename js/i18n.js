@@ -17,7 +17,8 @@ const I18N = {
     // Hero
     hero_eyebrow: "¡NOS CASAMOS!",
     hero_date: "Julio 16, 2026",
-    hero_instruction: "Desplázate para conocer los detalles del evento.",
+    hero_venue: "Garden Vista Ballroom · Passaic, NJ",
+    hero_instruction: "Desplázate para ver los detalles",
     countdown_days: "Días",
     countdown_hours: "Horas",
     countdown_minutes: "Minutos",
@@ -133,7 +134,8 @@ const I18N = {
     // Hero
     hero_eyebrow: "WE'RE GETTING MARRIED!",
     hero_date: "July 16, 2026",
-    hero_instruction: "Scroll down for event details.",
+    hero_venue: "Garden Vista Ballroom · Passaic, NJ",
+    hero_instruction: "Scroll down for details",
     countdown_days: "Days",
     countdown_hours: "Hours",
     countdown_minutes: "Minutes",
