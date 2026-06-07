@@ -47,7 +47,7 @@ const I18N = {
     faq_q_dresscode: "¿Cuál es el código de vestimenta?",
     faq_a_dresscode: "Formal · Evitar blanco (novia) y verde oliva (cortejo).",
     faq_q_gifts: "¿Tienen mesa de regalos?",
-    faq_a_gifts: "Tendremos una Lluvia de Sobres el día del evento.",
+    faq_a_gifts: "Tendremos una Lluvia de Sobres el día del evento. También puedes acompañarnos con un detalle vía Zelle.",
     faq_q_seats: "¿Cómo funcionan los cupos?",
     faq_a_seats: "Cada invitación tiene cupos asignados. Los verás al confirmar.",
 
@@ -164,7 +164,7 @@ const I18N = {
     faq_q_dresscode: "What is the dress code?",
     faq_a_dresscode: "Formal · Avoid white (bride) and olive green (wedding party).",
     faq_q_gifts: "Do you have a gift registry?",
-    faq_a_gifts: "We'll have a card box (Lluvia de Sobres) on the day.",
+    faq_a_gifts: "We'll have a card box (Lluvia de Sobres) on the day. You can also send a gift via Zelle.",
     faq_q_seats: "How do assigned seats work?",
     faq_a_seats: "Each invitation has assigned seats. You'll see them when you RSVP.",
 
