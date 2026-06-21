@@ -3,13 +3,6 @@
 // Fecha de la boda: 16 de Julio de 2026 (todo el día en general)
 const weddingDate = new Date("2026-07-16T00:00:00");
 
-// Fecha límite de confirmación: 20 de Junio de 2026 a las 11:59 PM
-const rsvpClosingDate = new Date("2026-06-20T23:59:59");
-
-function isRSVPClosed() {
-  return new Date() > rsvpClosingDate;
-}
-
 // Elementos del contador cacheados para rendimiento
 const countdownElements = {
   days: document.getElementById("days"),
@@ -19,28 +12,13 @@ const countdownElements = {
   container: document.getElementById("countdown")
 };
 
-function renderClosedPage() {
-  const closedPage = document.getElementById('closedPage');
-  if (!closedPage) return;
-
-  closedPage.removeAttribute('hidden');
-
-  // Forzar navbar visible para que el cambio de idioma siga siendo accesible
-  document.querySelector('.navbar')?.classList.add('is-visible');
-}
-
 /**
  * Verifica si el usuario ya envió su confirmación al cargar la página.
  * Si es así, actualiza la tarjeta de RSVP para reflejar que ya está confirmado.
- * Si el período cerró, muestra la página completa de cierre.
  */
 function checkRSVPStatus() {
-    if (isRSVPClosed()) {
-        renderClosedPage();
-        return;
-    }
-
     if (localStorage.getItem('rsvpStatus') === 'sent') {
+        const rsvpCard = document.querySelector('.rsvp__card');
         const rsvpBtn = document.querySelector('.rsvp__card-btn');
         const rsvpText = document.querySelector('.rsvp__card-text');
 
@@ -234,8 +212,6 @@ setInterval(updateCountdown, 1000);
  * @returns {void}
  */
 function openRSVP() {
-  if (isRSVPClosed()) return;
-
   const modal = document.getElementById("rsvpModal");
   if (modal) {
     // Verificamos si el usuario ya envió su confirmación antes
