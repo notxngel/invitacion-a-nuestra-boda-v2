@@ -19,35 +19,24 @@ const countdownElements = {
   container: document.getElementById("countdown")
 };
 
-function renderClosedCard() {
-  const card = document.querySelector('.rsvp__card');
-  if (!card) return;
+function renderClosedPage() {
+  const closedPage = document.getElementById('closedPage');
+  if (!closedPage) return;
 
-  card.classList.add('rsvp__card--closed');
+  closedPage.removeAttribute('hidden');
 
-  const icon = card.querySelector('.rsvp__card-icon');
-  if (icon) icon.classList.add('rsvp__card-icon--closed');
-
-  card.querySelector('.rsvp__card-subtitle')?.remove();
-  card.querySelector('.rsvp__card-divider')?.remove();
-  card.querySelector('.rsvp__card-btn')?.remove();
-  card.querySelectorAll('.rsvp__card-text').forEach(el => el.remove());
-
-  card.insertAdjacentHTML('beforeend', `
-    <p class="rsvp__card-subtitle">${t('rsvp_closed_heading')}</p>
-    <p class="rsvp__card-text rsvp__card-text--closed">${t('rsvp_closed_body')}</p>
-    <p class="rsvp__card-signature">${t('rsvp_closed_signature')}<br><em>Angel &amp; Clara</em></p>
-  `);
+  // Forzar navbar visible para que el cambio de idioma siga siendo accesible
+  document.querySelector('.navbar')?.classList.add('is-visible');
 }
 
 /**
  * Verifica si el usuario ya envió su confirmación al cargar la página.
  * Si es así, actualiza la tarjeta de RSVP para reflejar que ya está confirmado.
- * Si el período cerró, muestra el estado de cierre.
+ * Si el período cerró, muestra la página completa de cierre.
  */
 function checkRSVPStatus() {
     if (isRSVPClosed()) {
-        renderClosedCard();
+        renderClosedPage();
         return;
     }
 
