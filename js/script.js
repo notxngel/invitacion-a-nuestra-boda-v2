@@ -3,6 +3,13 @@
 // Fecha de la boda: 16 de Julio de 2026 (todo el día en general)
 const weddingDate = new Date("2026-07-16T00:00:00");
 
+// Fecha límite de confirmación: 20 de Junio de 2026 a las 11:59 PM
+const rsvpClosingDate = new Date("2026-06-20T23:59:59");
+
+function isRSVPClosed() {
+  return new Date() > rsvpClosingDate;
+}
+
 // Elementos del contador cacheados para rendimiento
 const countdownElements = {
   days: document.getElementById("days"),
@@ -12,19 +19,44 @@ const countdownElements = {
   container: document.getElementById("countdown")
 };
 
+function renderClosedCard() {
+  const card = document.querySelector('.rsvp__card');
+  if (!card) return;
+
+  card.classList.add('rsvp__card--closed');
+
+  const icon = card.querySelector('.rsvp__card-icon');
+  if (icon) icon.classList.add('rsvp__card-icon--closed');
+
+  card.querySelector('.rsvp__card-subtitle')?.remove();
+  card.querySelector('.rsvp__card-divider')?.remove();
+  card.querySelector('.rsvp__card-btn')?.remove();
+  card.querySelectorAll('.rsvp__card-text').forEach(el => el.remove());
+
+  card.insertAdjacentHTML('beforeend', `
+    <p class="rsvp__card-subtitle">${t('rsvp_closed_heading')}</p>
+    <p class="rsvp__card-text rsvp__card-text--closed">${t('rsvp_closed_body')}</p>
+    <p class="rsvp__card-signature">${t('rsvp_closed_signature')}<br><em>Angel &amp; Clara</em></p>
+  `);
+}
+
 /**
  * Verifica si el usuario ya envió su confirmación al cargar la página.
  * Si es así, actualiza la tarjeta de RSVP para reflejar que ya está confirmado.
+ * Si el período cerró, muestra el estado de cierre.
  */
 function checkRSVPStatus() {
+    if (isRSVPClosed()) {
+        renderClosedCard();
+        return;
+    }
+
     if (localStorage.getItem('rsvpStatus') === 'sent') {
-        const rsvpCard = document.querySelector('.rsvp__card');
         const rsvpBtn = document.querySelector('.rsvp__card-btn');
         const rsvpText = document.querySelector('.rsvp__card-text');
-        
+
         if (rsvpBtn) {
             rsvpBtn.innerHTML = `<span>${t("success_title")}</span>`;
-            // No deshabilitamos el botón para que puedan ver el mensaje de éxito otra vez si quieren
         }
         if (rsvpText) {
             rsvpText.innerHTML = `<strong>${t("success_subtitle")}</strong><br>${t("success_text")}`;
@@ -213,7 +245,7 @@ setInterval(updateCountdown, 1000);
  * @returns {void}
  */
 function openRSVP() {
-
+  if (isRSVPClosed()) return;
 
   const modal = document.getElementById("rsvpModal");
   if (modal) {
@@ -221,7 +253,7 @@ function openRSVP() {
     if (localStorage.getItem('rsvpStatus') === 'sent') {
         mostrarExito();
     }
-    
+
     modal.classList.add("active");
     document.body.style.overflow = "hidden"; // Evitar scroll de fondo
   }
