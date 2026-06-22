@@ -624,7 +624,12 @@ function mostrarExito() {
 
   modalContent.innerHTML = `
     <div class="modal__success">
-      <div class="modal__success-ring" aria-hidden="true">💍</div>
+      <div class="modal__success-icon" aria-hidden="true">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="8 12 11 15 16 9"/>
+        </svg>
+      </div>
       <h2 class="modal__success-title">${t("success_title")}</h2>
       <p class="modal__success-subtitle">${t("success_subtitle")}</p>
       <p class="modal__success-text">${t("success_text")}</p>

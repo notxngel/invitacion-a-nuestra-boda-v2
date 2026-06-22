@@ -1508,10 +1508,10 @@ body::before {
   padding: 1rem 0.5rem 0.5rem;
 }
 
-.modal__success-ring {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  line-height: 1;
+.modal__success-icon {
+  color: var(--color-gold);
+  margin-bottom: 1.25rem;
+  opacity: 0.9;
 }
 
 .modal__success-title {
