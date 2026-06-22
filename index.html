@@ -49,7 +49,7 @@
             rel="stylesheet">
     </noscript>
     <!-- Estilos -->
-    <link rel="stylesheet" href="css/style.css?v=4">
+    <link rel="stylesheet" href="css/style.css?v=5">
 </head>
 
 <body>
@@ -388,8 +388,24 @@
                         Junio</strong></p>
             </div>
 
+            <!-- Verificación de invitado (gate por nombre) -->
+            <div id="rsvpGate" class="rsvp-gate">
+                <p class="rsvp-gate__label" data-i18n="gate_label">Antes de confirmar</p>
+                <label class="form__label" for="gateInput" data-i18n="gate_instruction">Escribe tu nombre para
+                    verificar tu invitación</label>
+                <div class="rsvp-gate__row">
+                    <input type="text" id="gateInput" class="form__input" autocomplete="off"
+                        placeholder="Ej: Ana García" data-i18n-placeholder="gate_placeholder">
+                    <button type="button" id="gateBtn" class="btn btn--submit rsvp-gate__btn"
+                        data-i18n="gate_btn">Verificar</button>
+                </div>
+                <div id="gateResult" class="rsvp-gate__result" role="status" aria-live="polite"></div>
+            </div>
+
+            <p id="gateGreeting" class="rsvp-gate__greeting" style="display:none;"></p>
+
             <!-- Zelle -->
-            <div class="modal__zelle">
+            <div class="modal__zelle" style="display:none;">
                 <p class="modal__zelle-label" data-i18n="zelle_label">Detalle especial · Zelle</p>
                 <div class="modal__zelle-card">
                     <span class="modal__zelle-number" id="zelleDisplay"></span>
@@ -404,7 +420,7 @@
                 <p class="modal__zelle-note" data-i18n="zelle_note">Si quieres acompañar este día con un detalle, aquí puedes hacerlo.</p>
             </div>
 
-            <form id="rsvpForm" class="form" novalidate>
+            <form id="rsvpForm" class="form" novalidate style="display:none;">
                 <!-- Honeypot anti-bot (campo invisible para humanos) -->
                 <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
                     <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
@@ -504,9 +520,10 @@
     <div class="custom-cursor"></div>
 
     <!-- JavaScript -->
-    <script src="js/config.js?v=4"></script>
-    <script src="js/i18n.js?v=4"></script>
-    <script src="js/script.js?v=4"></script>
+    <script src="js/config.js?v=5"></script>
+    <script src="js/i18n.js?v=5"></script>
+    <script src="js/guestList.js?v=5"></script>
+    <script src="js/script.js?v=5"></script>
 </body>
 
 </html>

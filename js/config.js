@@ -7,6 +7,9 @@
  * y rechace cualquier otra procedencia.
  */
 const CONFIG = Object.freeze({
+  // Cierra las confirmaciones: oculta el formulario y nadie puede confirmar.
+  // Pon en false para reabrir el RSVP.
+  rsvpClosed: true,
   webhookURL: "https://hook.us2.make.com/1csu9bqqywlg9i4fz4uxv7ge34vdvcan",
   adminKey: "r7xQ3",
   maxCupos: 4,

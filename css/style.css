@@ -1123,6 +1123,76 @@ body::before {
   margin: var(--space-xs) 0 0 0;
 }
 
+/* RSVP Gate — verificación de invitado por nombre */
+.rsvp-gate {
+  margin-bottom: var(--space-xl);
+}
+
+.rsvp-gate__label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-gold);
+  text-align: center;
+  margin: 0 0 var(--space-sm) 0;
+}
+
+.rsvp-gate .form__label {
+  display: block;
+  text-align: center;
+  margin-bottom: var(--space-sm);
+}
+
+.rsvp-gate__row {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: stretch;
+}
+
+.rsvp-gate__row .form__input {
+  flex: 1;
+  min-width: 0;
+}
+
+.rsvp-gate__btn {
+  flex: 0 0 auto;
+  width: auto;
+  margin: 0;
+  white-space: nowrap;
+  padding-left: var(--space-lg);
+  padding-right: var(--space-lg);
+}
+
+.rsvp-gate__result {
+  min-height: 1em;
+  margin-top: var(--space-sm);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.rsvp-gate__result.is-error {
+  color: #b91c1c;
+}
+
+.rsvp-gate__greeting {
+  margin: 0 0 var(--space-lg) 0;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--color-dark);
+  text-align: center;
+}
+
+@media (max-width: 28rem) {
+  .rsvp-gate__row {
+    flex-direction: column;
+  }
+
+  .rsvp-gate__btn {
+    width: 100%;
+  }
+}
+
 .modal {
   position: fixed;
   inset: 0;

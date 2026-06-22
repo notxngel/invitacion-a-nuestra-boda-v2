@@ -31,8 +31,36 @@ function checkRSVPStatus() {
     }
 }
 
+/**
+ * Si las confirmaciones están cerradas (CONFIG.rsvpClosed), reemplaza la
+ * tarjeta de RSVP por un mensaje de cierre y elimina el botón para abrir
+ * el formulario. Nadie puede confirmar mientras esté activo.
+ */
+function applyRsvpClosedState() {
+  if (!CONFIG.rsvpClosed) return;
+  const card = document.querySelector('.rsvp__card');
+  if (!card) return;
+
+  card.innerHTML = `
+    <div class="rsvp__card-accent" aria-hidden="true"></div>
+    <div class="rsvp__card-icon" aria-hidden="true">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+      </svg>
+    </div>
+    <h3 class="rsvp__card-subtitle">${t("rsvp_closed_heading")}</h3>
+    <div class="rsvp__card-divider" aria-hidden="true"></div>
+    <p class="rsvp__card-text">${t("rsvp_closed_body")}</p>
+    <p class="rsvp__card-text" style="font-style: italic; margin-top: 1rem;">${t("rsvp_closed_signature")}</p>
+  `;
+}
+
 // Ejecutar al cargar
-document.addEventListener('DOMContentLoaded', checkRSVPStatus);
+document.addEventListener('DOMContentLoaded', () => {
+  applyRsvpClosedState();
+  if (!CONFIG.rsvpClosed) checkRSVPStatus();
+});
 
 /** ZELLE: Poblar número desde config e inicializar copiado **/
 function initZelle() {
@@ -212,6 +240,9 @@ setInterval(updateCountdown, 1000);
  * @returns {void}
  */
 function openRSVP() {
+  // Confirmaciones cerradas: no abrir el formulario bajo ninguna circunstancia.
+  if (CONFIG.rsvpClosed) return;
+
   const modal = document.getElementById("rsvpModal");
   if (modal) {
     // Verificamos si el usuario ya envió su confirmación antes
@@ -248,10 +279,11 @@ document.addEventListener("keydown", (e) => {
 
 /** 5. CUPOS: Generación dinámica de campos de invitados **/
 
-(function generarCamposDeNombres() {
+function generarCamposDeNombres(cuposArg) {
   const params = new URLSearchParams(window.location.search);
-  // Cupos: mínimo 1, máximo 4. Si no hay ?c= en la URL, muestra 1 campo.
-  const cupos = Math.min(Math.max(parseInt(params.get("c")) || 1, 1), CONFIG.maxCupos);
+  // Cupos: mínimo 1, máximo 4. Prioridad: argumento (cupos del invitado) > ?c= > 1.
+  const base = cuposArg ?? parseInt(params.get("c"));
+  const cupos = Math.min(Math.max(parseInt(base) || 1, 1), CONFIG.maxCupos);
 
   const container = document.getElementById("guestNamesContainer");
   if (!container) return;
@@ -277,7 +309,10 @@ document.addEventListener("keydown", (e) => {
             </div>`;
   }
   container.innerHTML = html;
-})();
+}
+
+// Generación inicial (usa ?c= o 1). El gate la regenera con los cupos del invitado.
+generarCamposDeNombres();
 
 /** 6. VALIDACIÓN: Feedback visual inmediato en campos **/
 
@@ -694,6 +729,100 @@ function cerrarYReiniciar() {
   interactives.forEach(el => {
     el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  });
+})();
+
+/** 10. GATE: Verificación de invitado por nombre **/
+(function initGuestGate() {
+  const gate = document.getElementById("rsvpGate");
+  const input = document.getElementById("gateInput");
+  const btn = document.getElementById("gateBtn");
+  const result = document.getElementById("gateResult");
+  const greeting = document.getElementById("gateGreeting");
+  const form = document.getElementById("rsvpForm");
+  const zelle = document.querySelector(".modal__zelle");
+
+  if (!gate || !input || !btn || !form) return;
+
+  // Normaliza texto: minúsculas, sin acentos, espacios colapsados.
+  const normalize = (s) => (s || "")
+    .toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  // Convierte cada entrada de la lista a { nombre, cupos }.
+  const asEntry = (g) =>
+    typeof g === "string"
+      ? { nombre: g, cupos: 1 }
+      : { nombre: g.nombre, cupos: g.cupos || 1 };
+
+  /**
+   * Busca el nombre escrito dentro de GUEST_LIST.
+   * Coincide por nombre/apellido (subcadena) o por iniciales (ej: "ll").
+   * Devuelve el estado: short | none | many | ok.
+   */
+  function buscarInvitado(query) {
+    const q = normalize(query);
+    if (q.length < 2) return { status: "short" };
+
+    const qIniciales = q.replace(/[^a-z0-9]/g, "");
+    const lista = typeof GUEST_LIST !== "undefined" ? GUEST_LIST : [];
+    const matches = lista.map(asEntry).filter((entry) => {
+      const n = normalize(entry.nombre);
+      if (n.includes(q)) return true; // subcadena: "lauren", "labarrere"...
+      const iniciales = n.split(" ").filter(Boolean).map((w) => w[0]).join("");
+      return iniciales === qIniciales; // iniciales: "ll" -> Lauren Labarrere
+    });
+
+    if (matches.length === 0) return { status: "none" };
+    if (matches.length > 1) return { status: "many" };
+    return { status: "ok", entry: matches[0] };
+  }
+
+  function showResult(message, type) {
+    result.textContent = message || "";
+    result.className = "rsvp-gate__result" + (type ? " is-" + type : "");
+  }
+
+  function verificar() {
+    const res = buscarInvitado(input.value);
+
+    if (res.status === "short") return showResult(t("gate_short"), "error");
+    if (res.status === "none") return showResult(t("gate_none"), "error");
+    if (res.status === "many") return showResult(t("gate_many"), "error");
+
+    // Coincidencia única: desbloquear el formulario.
+    showResult("", "");
+    gate.style.display = "none";
+    if (zelle) zelle.style.display = "";
+    form.style.display = "";
+
+    // Regenerar campos con los cupos del invitado y pre-llenar su nombre.
+    generarCamposDeNombres(res.entry.cupos);
+    setupValidationListeners();
+    const guest1 = document.getElementById("guest1");
+    if (guest1) guest1.value = res.entry.nombre;
+
+    if (greeting) {
+      greeting.textContent = t("gate_hello").replace("{name}", res.entry.nombre);
+      greeting.style.display = "";
+    }
+
+    // Llevar la vista al inicio del formulario.
+    greeting?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  btn.addEventListener("click", verificar);
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      verificar();
+    }
+  });
+  // Limpiar el mensaje en cuanto el invitado vuelve a escribir.
+  input.addEventListener("input", () => {
+    if (result.textContent) showResult("", "");
   });
 })();
 

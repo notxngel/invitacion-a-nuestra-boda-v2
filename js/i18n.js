@@ -84,6 +84,16 @@ const I18N = {
     form_message_placeholder: "Déjanos tus mejores deseos...",
     form_submit: "Enviar Confirmación",
 
+    // Gate (verificación por nombre)
+    gate_label: "Antes de confirmar",
+    gate_instruction: "Escribe tu nombre para verificar tu invitación",
+    gate_placeholder: "Ej: Ana García",
+    gate_btn: "Verificar",
+    gate_short: "Escribe al menos dos letras de tu nombre.",
+    gate_none: "No encontramos tu nombre en la lista. Revisa cómo lo escribiste o contáctanos.",
+    gate_many: "Hay varias coincidencias. Por favor escribe tu nombre y apellido completos.",
+    gate_hello: "¡Hola, {name}! Estás en nuestra lista. 💛",
+
     // Song suggestion
     songs_title: "Ayudanos a armar la playlist",
     songs_subtitle: "¿Qué canciones no pueden faltar?",
@@ -200,6 +210,16 @@ const I18N = {
     form_message: "Message (Optional)",
     form_message_placeholder: "Send us your best wishes...",
     form_submit: "Send Confirmation",
+
+    // Gate (name verification)
+    gate_label: "Before you confirm",
+    gate_instruction: "Type your name to verify your invitation",
+    gate_placeholder: "e.g. Jane Doe",
+    gate_btn: "Verify",
+    gate_short: "Type at least two letters of your name.",
+    gate_none: "We couldn't find your name on the list. Check the spelling or contact us.",
+    gate_many: "Multiple matches found. Please type your full first and last name.",
+    gate_hello: "Hi, {name}! You're on our list. 💛",
 
     // Song suggestion
     songs_title: "Help us build the playlist",
