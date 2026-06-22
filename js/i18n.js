@@ -93,6 +93,7 @@ const I18N = {
     gate_none: "No encontramos tu nombre en la lista. Revisa cómo lo escribiste o contáctanos.",
     gate_many: "Hay varias coincidencias. Por favor escribe tu nombre y apellido completos.",
     gate_hello: "¡Hola, {name}! Estás en nuestra lista.",
+    gate_confirmed: "¡{name}, ya tenemos tu confirmación!",
 
     // Song suggestion
     songs_title: "Ayudanos a armar la playlist",
@@ -221,6 +222,7 @@ const I18N = {
     gate_none: "We couldn't find your name on the list. Check the spelling or contact us.",
     gate_many: "Multiple matches found. Please type your full first and last name.",
     gate_hello: "Hi, {name}! You're on our list.",
+    gate_confirmed: "Hi, {name}! We already have your RSVP.",
 
     // Song suggestion
     songs_title: "Help us build the playlist",

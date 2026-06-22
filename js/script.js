@@ -658,6 +658,51 @@ function mostrarExito() {
 }
 
 /**
+ * Muestra la pantalla de confirmación ya recibida para invitados que ya confirmaron.
+ * Reutiliza el mismo layout de modal__success con texto diferenciado.
+ */
+function mostrarYaConfirmado(nombre) {
+  const modalContent = document.querySelector(".modal__content");
+  if (!modalContent) return;
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const isAdmin = urlParams.get('dbg') === CONFIG.adminKey;
+  const isApple = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent || navigator.vendor);
+
+  const calendarBtn = isApple
+    ? `<a href="boda.ics" class="btn btn--apple-cal">${t("success_apple_cal")}</a>`
+    : `<a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+de+Angel+y+Clara&dates=20260716T210000Z/20260717T050000Z&details=%C2%A1Te+esperamos+para+celebrar+nuestra+boda!&location=Garden+Vista+Ballroom,+29+Macarthur+Ave,+Passaic,+NJ+07055" target="_blank" rel="noopener" class="btn btn--google-cal">${t("success_google_cal")}</a>`;
+
+  modalContent.innerHTML = `
+    <div class="modal__success">
+      <div class="modal__success-icon" aria-hidden="true">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="8 12 11 15 16 9"/>
+        </svg>
+      </div>
+      <h2 class="modal__success-title">${t("success_title")}</h2>
+      <p class="modal__success-subtitle">${t("gate_confirmed").replace("{name}", nombre)}</p>
+      <p class="modal__success-text">${t("success_text")}</p>
+      <div class="modal__success-cal">${calendarBtn}</div>
+      <div class="modal__success-zelle modal__zelle">
+        <p class="modal__zelle-label">${t("zelle_label")}</p>
+        <div class="modal__zelle-card">
+          <span class="modal__zelle-number">${CONFIG.zellePhone}</span>
+          <button class="modal__zelle-copy" type="button" onclick="copyZelle()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <span data-i18n="zelle_copy">${t("zelle_copy")}</span>
+          </button>
+        </div>
+        <p class="modal__zelle-note">${t("zelle_note")}</p>
+      </div>
+      <button class="modal__success-close" onclick="cerrarYReiniciar()">${t("success_close")}</button>
+      ${isAdmin ? `<button class="modal__success-debug" onclick="location.reload();">${t("success_test")}</button>` : ''}
+    </div>
+  `;
+}
+
+/**
  * Muestra un mensaje de error visual en el botón de envío.
  * 
  * @param {string} [mensaje="Hubo un error. Intenta de nuevo"] - El mensaje de error a mostrar.
@@ -724,11 +769,11 @@ function cerrarYReiniciar() {
     .replace(/\s+/g, " ")
     .trim();
 
-  // Convierte cada entrada de la lista a { nombre, cupos }.
+  // Convierte cada entrada de la lista a { nombre, cupos, confirmado }.
   const asEntry = (g) =>
     typeof g === "string"
-      ? { nombre: g, cupos: 1 }
-      : { nombre: g.nombre, cupos: g.cupos || 1 };
+      ? { nombre: g, cupos: 1, confirmado: false }
+      : { nombre: g.nombre, cupos: g.cupos || 1, confirmado: g.confirmado || false };
 
   /**
    * Busca el nombre escrito dentro de GUEST_LIST.
@@ -765,13 +810,19 @@ function cerrarYReiniciar() {
     if (res.status === "none") return showResult(t("gate_none"), "error");
     if (res.status === "many") return showResult(t("gate_many"), "error");
 
-    // Coincidencia única: desbloquear el formulario.
     showResult("", "");
     gate.style.display = "none";
+
+    // Invitado ya confirmado: mostrar pantalla de éxito directamente.
+    if (res.entry.confirmado) {
+      mostrarYaConfirmado(res.entry.nombre);
+      return;
+    }
+
+    // Invitado pendiente: desbloquear el formulario.
     if (zelle) zelle.style.display = "";
     form.style.display = "";
 
-    // Regenerar campos con los cupos del invitado y pre-llenar su nombre.
     generarCamposDeNombres(res.entry.cupos);
     setupValidationListeners();
     const guest1 = document.getElementById("guest1");
@@ -782,7 +833,6 @@ function cerrarYReiniciar() {
       greeting.style.display = "";
     }
 
-    // Llevar la vista al inicio del formulario.
     greeting?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
