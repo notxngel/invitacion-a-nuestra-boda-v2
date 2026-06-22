@@ -1172,9 +1172,11 @@ body::before {
 .rsvp-gate__greeting {
   margin: 0 0 var(--space-lg) 0;
   font-family: var(--font-serif);
-  font-size: 1.15rem;
+  font-style: italic;
+  font-size: 1.1rem;
   color: var(--color-dark);
   text-align: center;
+  line-height: 1.5;
 }
 
 @media (max-width: 28rem) {
@@ -1234,20 +1236,24 @@ body::before {
   right: var(--space-md);
   background: none;
   border: none;
-  font-size: 1.8rem;
-  color: rgba(83, 94, 77, 0.5);
+  color: var(--color-text-muted);
   cursor: pointer;
-  padding: 0;
+  padding: 0.4rem;
+  border-radius: 50%;
   line-height: 1;
-  transition: color var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.45;
+  transition: opacity var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
 }
 
 .modal__close:hover,
 .modal__close:focus {
+  opacity: 1;
+  background: rgba(168, 127, 59, 0.08);
   color: var(--color-dark);
-  outline: 2px solid var(--color-gold);
-  outline-offset: 2px;
-  border-radius: 2px;
+  outline: none;
 }
 
 .modal__header {
@@ -1255,25 +1261,70 @@ body::before {
   margin-bottom: var(--space-xl);
 }
 
-.modal__title {
-  font-family: var(--font-serif);
-  font-size: clamp(1.5rem, 5vw, 2rem);
-  margin-bottom: 0.3em;
-  color: var(--color-dark);
+/* Ornamento decorativo sobre el header */
+.modal__header::before {
+  content: "✦";
+  display: block;
+  color: var(--color-gold);
+  font-size: 0.65rem;
+  letter-spacing: 0.5em;
+  padding-left: 0.5em;
+  margin-bottom: 0.75rem;
+  opacity: 0.75;
 }
 
 .modal__subtitle {
+  font-family: var(--font-serif);
   color: var(--color-gold);
-  text-transform: uppercase;
-  font-size: 0.72rem;
-  letter-spacing: 0.16em;
+  font-style: italic;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+  margin: 0 0 0.4em 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.modal__subtitle::before,
+.modal__subtitle::after {
+  content: "";
+  flex: 0 0 1.5rem;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(168, 127, 59, 0.45));
+  display: block;
+}
+
+.modal__subtitle::after {
+  background: linear-gradient(to left, transparent, rgba(168, 127, 59, 0.45));
+}
+
+.modal__title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.7rem, 5vw, 2.2rem);
   margin: 0;
+  color: var(--color-dark);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.modal__header-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(168, 127, 59, 0.28), transparent);
+  margin: var(--space-md) auto;
+  width: 65%;
 }
 
 .modal__deadline {
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   color: var(--color-text-muted);
-  margin-top: 0.75rem;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.modal__deadline strong {
+  color: var(--color-dark);
+  font-weight: 700;
 }
 
 /* --- 15. FORMULARIO --- */
