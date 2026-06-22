@@ -109,6 +109,7 @@ const I18N = {
     zelle_note: "Si quieres acompañar este día con un detalle, aquí puedes hacerlo.",
 
     // Validation
+    form_sending: "Enviando...",
     val_name: "Por favor, ingresa tu nombre.",
     val_phone: "Por favor, ingresa tu teléfono.",
     val_checkbox: "Por favor confirma que leíste los detalles del evento.",
@@ -233,9 +234,10 @@ const I18N = {
     zelle_label: "Gift · Zelle",
     zelle_copy: "Copy",
     zelle_copied: "Copied!",
-    zelle_note: "you can have a gift with us.",
+    zelle_note: "If you'd like to give a gift, you can do so here.",
 
     // Validation
+    form_sending: "Sending...",
     val_name: "Please enter your name.",
     val_phone: "Please enter your phone number.",
     val_checkbox: "Please confirm that you've read the event details.",

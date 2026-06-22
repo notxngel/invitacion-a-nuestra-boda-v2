@@ -41,9 +41,10 @@ function applyRsvpClosedState() {
   const card = document.querySelector('.rsvp__card');
   if (!card) return;
 
+  card.classList.add('rsvp__card--closed');
   card.innerHTML = `
     <div class="rsvp__card-accent" aria-hidden="true"></div>
-    <div class="rsvp__card-icon" aria-hidden="true">
+    <div class="rsvp__card-icon rsvp__card-icon--closed" aria-hidden="true">
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
         <polyline points="22,6 12,13 2,6"></polyline>
@@ -51,8 +52,8 @@ function applyRsvpClosedState() {
     </div>
     <h3 class="rsvp__card-subtitle">${t("rsvp_closed_heading")}</h3>
     <div class="rsvp__card-divider" aria-hidden="true"></div>
-    <p class="rsvp__card-text">${t("rsvp_closed_body")}</p>
-    <p class="rsvp__card-text" style="font-style: italic; margin-top: 1rem;">${t("rsvp_closed_signature")}</p>
+    <p class="rsvp__card-text rsvp__card-text--closed">${t("rsvp_closed_body")}</p>
+    <p class="rsvp__card-signature">${t("rsvp_closed_signature")}<br><em>Angel &amp; Clara</em></p>
   `;
 }
 
@@ -263,7 +264,7 @@ function openRSVP() {
  */
 function closeRSVP(e) {
   // Si se llama directamente (botón X) o si el evento es click en overlay
-  if (!e || e?.target?.id === "rsvpModal" || e?.target?.closest(".modal__close")) {
+  if (!e || e.target.id === "rsvpModal" || e.target.closest(".modal__close")) {
     const modal = document.getElementById("rsvpModal");
     if (modal) {
       modal.classList.remove("active");
@@ -487,13 +488,16 @@ function handleValidation() {
 function toggleSubmitState(isSubmitting) {
   const submitBtn = document.getElementById("submitBtn");
   if (!submitBtn) return;
-  
+
   if (isSubmitting) {
     submitBtn.dataset.originalText = submitBtn.textContent;
-    submitBtn.innerHTML = '<span class="spinner"></span> Enviando...';
+    submitBtn.innerHTML = `<span class="spinner"></span> ${t("form_sending")}`;
     submitBtn.disabled = true;
+    submitBtn.classList.remove('is-error');
   } else {
-    submitBtn.innerHTML = submitBtn.dataset.originalText || "Enviar Confirmación";
+    if (!submitBtn.classList.contains('is-error')) {
+      submitBtn.innerHTML = submitBtn.dataset.originalText || t("form_submit");
+    }
     submitBtn.disabled = false;
   }
 }
@@ -607,81 +611,39 @@ rsvpForm?.addEventListener("submit", async (e) => {
  * @returns {void}
  */
 function mostrarExito() {
-  // Reemplazamos el contenido del modal con un mensaje de éxito
   const modalContent = document.querySelector(".modal__content");
 
-  // Permite ver el botón secreto de reinicio de pruebas solo si el URL lo autoriza
   const urlParams = new URLSearchParams(window.location.search);
   const isAdmin = urlParams.get('dbg') === CONFIG.adminKey;
-  const botonPruebasHTML = isAdmin 
-    ? `<p style="margin-top: 1.5rem; font-size: 0.75rem; color: #d1d5db; text-decoration: underline; cursor: pointer;" onclick="localStorage.removeItem('rsvpStatus'); location.reload();">
-          ${t("success_test")}
-       </p>` 
-    : '';
 
-  // Detección de dispositivo para Mostrar Calendario Adecuado
-  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-  const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-  const isMac = /Macintosh/.test(userAgent);
-  const isApple = isIOS || isMac;
+  const isApple = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent || navigator.vendor);
 
-  let calendarButtonsHTML = '';
-  if (isApple) {
-      calendarButtonsHTML = `
-            <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem;">
-                <a href="boda.ics" class="btn btn--dark" style="background-color: #000; border-color: #000; color: white;">
-                    ${t("success_apple_cal")}
-                </a>
-            </div>
-      `;
-  } else {
-      calendarButtonsHTML = `
-            <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem;">
-                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+de+Angel+y+Clara&dates=20260716T210000Z/20260717T050000Z&details=%C2%A1Te+esperamos+para+celebrar+nuestra+boda!&location=Garden+Vista+Ballroom,+29+Macarthur+Ave,+Passaic,+NJ+07055" target="_blank" rel="noopener" class="btn btn--dark" style="background-color: #4285F4; border-color: #4285F4; color: white;">
-                    ${t("success_google_cal")}
-                </a>
-            </div>
-      `;
-  }
+  const calendarBtn = isApple
+    ? `<a href="boda.ics" class="btn btn--apple-cal">${t("success_apple_cal")}</a>`
+    : `<a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+de+Angel+y+Clara&dates=20260716T210000Z/20260717T050000Z&details=%C2%A1Te+esperamos+para+celebrar+nuestra+boda!&location=Garden+Vista+Ballroom,+29+Macarthur+Ave,+Passaic,+NJ+07055" target="_blank" rel="noopener" class="btn btn--google-cal">${t("success_google_cal")}</a>`;
 
   modalContent.innerHTML = `
-        <div style="text-align: center; padding: 2rem 1rem;">
-            <div style="font-size: 3rem; margin-bottom: 1rem;">💍</div>
-            <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 0.5rem;">
-                ${t("success_title")}
-            </h2>
-            <p style="color: #c5a059; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 1.5rem;">
-                ${t("success_subtitle")}
-            </p>
-            <p style="color: #57534e; line-height: 1.6;">
-                ${t("success_text")}
-            </p>
-            
-            ${calendarButtonsHTML}
-
-            <div style="margin-top: 1.5rem; padding: 1rem 1.25rem; background: rgba(109, 30, 212, 0.04); border: 1px solid rgba(109, 30, 212, 0.2); border-radius: 8px;">
-                <p style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.15em; color: #535e4d; margin: 0 0 0.5rem 0;">${t("zelle_label")}</p>
-                <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.25rem;">
-                    <span style="font-family: 'Playfair Display', serif; font-size: 1.25rem; color: #41533b; font-weight: 700; letter-spacing: 0.04em;">${CONFIG.zellePhone}</span>
-                    <button onclick="copyZelle()" class="modal__zelle-copy" style="background: #41533b; color: white; border: none; border-radius: 4px; padding: 0.4em 0.9em; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35em;">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                        <span data-i18n="zelle_copy">${t("zelle_copy")}</span>
-                    </button>
-                </div>
-                <p style="font-size: 0.8rem; color: #535e4d; font-style: italic; margin: 0;">${t("zelle_note")}</p>
-            </div>
-
-            <button
-                class="btn"
-                style="margin-top: 1.5rem; color: #6B7280; text-decoration: underline; background: transparent; border: none;"
-                onclick="cerrarYReiniciar()"
-            >
-                ${t("success_close")}
-            </button>
-            
-            ${botonPruebasHTML}
+    <div class="modal__success">
+      <div class="modal__success-ring" aria-hidden="true">💍</div>
+      <h2 class="modal__success-title">${t("success_title")}</h2>
+      <p class="modal__success-subtitle">${t("success_subtitle")}</p>
+      <p class="modal__success-text">${t("success_text")}</p>
+      <div class="modal__success-cal">${calendarBtn}</div>
+      <div class="modal__success-zelle modal__zelle">
+        <p class="modal__zelle-label">${t("zelle_label")}</p>
+        <div class="modal__zelle-card">
+          <span class="modal__zelle-number">${CONFIG.zellePhone}</span>
+          <button class="modal__zelle-copy" type="button" onclick="copyZelle()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <span data-i18n="zelle_copy">${t("zelle_copy")}</span>
+          </button>
         </div>
-    `;
+        <p class="modal__zelle-note">${t("zelle_note")}</p>
+      </div>
+      <button class="modal__success-close" onclick="cerrarYReiniciar()">${t("success_close")}</button>
+      ${isAdmin ? `<button class="modal__success-debug" onclick="localStorage.removeItem('rsvpStatus'); location.reload();">${t("success_test")}</button>` : ''}
+    </div>
+  `;
 }
 
 /**
@@ -691,11 +653,11 @@ function mostrarExito() {
  * @returns {void}
  */
 function mostrarError(mensaje = t("error_default")) {
-  const submitBtn = document.querySelector(".btn--submit");
+  const submitBtn = document.getElementById("submitBtn");
   if (submitBtn) {
-      submitBtn.textContent = mensaje;
-      submitBtn.disabled = false;
-      submitBtn.style.backgroundColor = "#b91c1c"; // Rojo para indicar error
+    submitBtn.textContent = mensaje;
+    submitBtn.disabled = false;
+    submitBtn.classList.add('is-error');
   }
 }
 
