@@ -676,7 +676,7 @@ body::before {
 
 /* --- 9. ALBUM --- */
 .album {
-  padding: var(--space-3xl) 0 var(--space-2xl);
+  padding: var(--space-3xl) 0;
   background: transparent;
 }
 
@@ -789,10 +789,10 @@ body::before {
 .faq-list {
   max-width: 48rem;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.82);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(168, 127, 59, 0.22);
+  border: 1px solid rgba(168, 127, 59, 0.2);
   border-top: 2px solid rgba(168, 127, 59, 0.45);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -881,7 +881,7 @@ body::before {
 
 /* --- 12. UBICACIONES --- */
 .locations {
-  padding: var(--space-2xl) 0 var(--space-3xl);
+  padding: var(--space-3xl) 0;
   background: transparent;
 }
 
@@ -892,9 +892,17 @@ body::before {
   overflow: hidden;
   border-radius: var(--radius-lg);
   border: 1px solid rgba(168, 127, 59, 0.2);
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  border-top: 2px solid rgba(168, 127, 59, 0.45);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(168, 127, 59, 0.08);
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.location-card:hover {
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(168, 127, 59, 0.12);
+  transform: translateY(-2px);
 }
 
 .location-card__header {
@@ -934,18 +942,21 @@ body::before {
 
 /* --- 13. RSVP --- */
 .rsvp {
-  padding: var(--space-2xl) 0 var(--space-3xl);
+  padding: var(--space-3xl) 0;
   background: transparent;
 }
 
 .rsvp__card {
-  max-width: 38rem;
+  max-width: 40rem;
   margin: 0 auto;
   text-align: center;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(168, 127, 59, 0.25);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(168, 127, 59, 0.2);
+  border-top: 2px solid rgba(168, 127, 59, 0.45);
   border-radius: var(--radius-lg);
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.06), var(--shadow-gold);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(168, 127, 59, 0.08);
   padding: var(--space-2xl) var(--space-xl);
   position: relative;
   overflow: hidden;
@@ -955,23 +966,6 @@ body::before {
 .rsvp__card:hover {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08), var(--shadow-gold);
   transform: translateY(-3px);
-}
-
-/* Acento superior dorado más elegante */
-.rsvp__card-accent {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(168, 127, 59, 0.4) 25%,
-    var(--color-gold) 50%,
-    rgba(168, 127, 59, 0.4) 75%,
-    transparent 100%
-  );
 }
 
 .rsvp__card-icon {
@@ -1031,7 +1025,7 @@ body::before {
 
 .rsvp__card--closed:hover {
   transform: none;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(168, 127, 59, 0.06);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(168, 127, 59, 0.08);
 }
 
 .rsvp__card-icon--closed {
@@ -1775,13 +1769,11 @@ body::before {
   }
 
   /* --- Sections --- */
+  .album,
   .details,
+  .locations,
   .rsvp {
     padding: var(--space-2xl) 0;
-  }
-
-  .locations {
-    padding: var(--space-xl) 0 var(--space-2xl);
   }
 
   .section-header {

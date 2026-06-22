@@ -43,7 +43,6 @@ function applyRsvpClosedState() {
 
   card.classList.add('rsvp__card--closed');
   card.innerHTML = `
-    <div class="rsvp__card-accent" aria-hidden="true"></div>
     <div class="rsvp__card-icon rsvp__card-icon--closed" aria-hidden="true">
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
@@ -164,8 +163,15 @@ setInterval(updateCountdown, 1000);
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target); // Animamos solo una vez al entrar
+        const el = entry.target;
+        const prev = el.previousElementSibling;
+        const delay = prev && prev.classList.contains("section-header") ? 160 : 0;
+        if (delay) {
+          setTimeout(() => el.classList.add("is-visible"), delay);
+        } else {
+          el.classList.add("is-visible");
+        }
+        observer.unobserve(el);
       }
     });
   }, { threshold: 0.2, rootMargin: "0px 0px -50px 0px" });
