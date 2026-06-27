@@ -67,6 +67,23 @@ const I18N = {
     rsvp_closed_body: "Aunque no podremos tenerte a nuestro lado en este día tan especial, nuestro corazón guarda con profundo cariño cada uno de los momentos compartidos contigo. Tu amor y tu presencia en nuestras vidas son, y siempre serán, un regalo invaluable.",
     rsvp_closed_signature: "Con todo nuestro amor,",
 
+    // Página de cierre (full-page overlay)
+    closed_body: "Gracias a todos los que se pudieron registrar — estamos felices y con mucha emoción por verlos ahí. ¡Será una noche que jamás olvidaremos!",
+    closed_date_label: "Fecha",
+    closed_date_value: "Jueves, 16 de Julio de 2026",
+    closed_time_label: "Horario",
+    closed_time_value: "Llegada 4:30 PM",
+    closed_time_sub: "Ceremonia a las 5:00 PM",
+    closed_dress_label: "Vestimenta",
+    closed_dress_value: "Formal / Etiqueta Rigurosa",
+    closed_dress_sub: "Evitar blanco y verde oliva",
+    closed_parking_label: "Estacionamiento",
+    closed_parking_value: "Valet Parking gratuito",
+    closed_kids_label: "Política de Niños",
+    closed_kids_value: "Solo adultos",
+    closed_kids_sub: "Celebración exclusiva para adultos",
+    closed_venue_address: "29 Macarthur Ave, Passaic, NJ 07055",
+
     // Modal Form
     modal_title: "Confirmación",
     modal_subtitle: "Será un placer contar contigo",
@@ -195,6 +212,23 @@ const I18N = {
     rsvp_closed_heading: "The RSVP period has ended",
     rsvp_closed_body: "Although we won't be able to have you by our side on this special day, our hearts hold with deep gratitude every moment shared with you. Your love and presence in our lives are, and will always be, an invaluable gift.",
     rsvp_closed_signature: "With all our love,",
+
+    // Closed page (full-page overlay)
+    closed_body: "Thank you to everyone who was able to register — we are so excited to see you there. It's going to be a night we'll never forget!",
+    closed_date_label: "Date",
+    closed_date_value: "Thursday, July 16, 2026",
+    closed_time_label: "Schedule",
+    closed_time_value: "Arrival 4:30 PM",
+    closed_time_sub: "Ceremony at 5:00 PM",
+    closed_dress_label: "Dress Code",
+    closed_dress_value: "Formal / Black Tie",
+    closed_dress_sub: "Avoid white and olive green",
+    closed_parking_label: "Parking",
+    closed_parking_value: "Free Valet Parking",
+    closed_kids_label: "Children's Policy",
+    closed_kids_value: "Adults only",
+    closed_kids_sub: "Adults-only celebration",
+    closed_venue_address: "29 Macarthur Ave, Passaic, NJ 07055",
 
     // Modal Form
     modal_title: "Confirmation",

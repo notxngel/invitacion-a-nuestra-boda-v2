@@ -38,22 +38,12 @@ function checkRSVPStatus() {
  */
 function applyRsvpClosedState() {
   if (!CONFIG.rsvpClosed) return;
-  const card = document.querySelector('.rsvp__card');
-  if (!card) return;
 
-  card.classList.add('rsvp__card--closed');
-  card.innerHTML = `
-    <div class="rsvp__card-icon rsvp__card-icon--closed" aria-hidden="true">
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-        <polyline points="22,6 12,13 2,6"></polyline>
-      </svg>
-    </div>
-    <h3 class="rsvp__card-subtitle">${t("rsvp_closed_heading")}</h3>
-    <div class="rsvp__card-divider" aria-hidden="true"></div>
-    <p class="rsvp__card-text rsvp__card-text--closed">${t("rsvp_closed_body")}</p>
-    <p class="rsvp__card-signature">${t("rsvp_closed_signature")}<br><em>Angel &amp; Clara</em></p>
-  `;
+  const closedPage = document.getElementById('closedPage');
+  if (!closedPage) return;
+
+  closedPage.removeAttribute('hidden');
+  document.querySelector('.navbar')?.classList.add('is-visible');
 }
 
 // Ejecutar al cargar

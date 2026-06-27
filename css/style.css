@@ -2010,3 +2010,163 @@ body::before {
   }
 }
 
+
+
+/* ─── PÁGINA DE CIERRE (RSVP cerrado) ─── */
+
+.closed-page {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--color-white);
+  text-align: center;
+}
+
+.closed-page__bg {
+  position: fixed;
+  inset: 0;
+  background: url("../assets/hero_wedding_olive.webp") center 30% / cover;
+  filter: brightness(0.52);
+  z-index: -2;
+}
+
+.closed-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(30, 40, 28, 0.6) 0%, transparent 30%),
+    linear-gradient(to top,    rgba(30, 40, 28, 0.75) 0%, transparent 45%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.closed-page__content {
+  padding: 6rem 1.5rem 6rem;
+  max-width: 50rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.closed-page__rings {
+  color: var(--color-gold);
+  opacity: 0.85;
+  margin-bottom: 1.4rem;
+  line-height: 1;
+}
+
+.closed-page__names {
+  font-family: var(--font-names);
+  font-size: clamp(3.5rem, 11vw, 6rem);
+  font-weight: 400;
+  margin: 0 0 0.1em;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+}
+
+.closed-page__heading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1rem, 2.8vw, 1.35rem);
+  color: var(--color-gold);
+  margin: 0 0 1rem;
+  letter-spacing: 0.01em;
+}
+
+.closed-page__body {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.95rem;
+  line-height: 1.85;
+  max-width: 34rem;
+  margin: 0 auto 2.5rem;
+}
+
+.closed-page__cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 44rem;
+  margin-bottom: 2.5rem;
+}
+
+.closed-page__card {
+  background: rgba(20, 28, 20, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  text-align: left;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.closed-page__card--wide {
+  grid-column: 1 / -1;
+}
+
+.closed-page__card-label {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+
+.closed-page__card-title {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-white);
+  margin: 0 0 0.2rem;
+  line-height: 1.4;
+}
+
+.closed-page__card-sub {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  font-style: italic;
+}
+
+.closed-page__venue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.closed-page__venue-name {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+  color: var(--color-gold);
+  margin: 0;
+}
+
+.closed-page__venue-address {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+@media (max-width: 540px) {
+  .closed-page__cards {
+    grid-template-columns: 1fr;
+  }
+
+  .closed-page__card--wide {
+    grid-column: 1;
+  }
+
+  .closed-page__content {
+    padding: 5rem 1.25rem 5rem;
+  }
+}
