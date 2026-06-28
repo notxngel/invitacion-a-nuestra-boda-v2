@@ -43,7 +43,22 @@ function applyRsvpClosedState() {
   if (!closedPage) return;
 
   closedPage.removeAttribute('hidden');
-  document.querySelector('.navbar')?.classList.add('is-visible');
+
+  // Ocultar el navbar — el closed-page tiene su propio toggle de idioma
+  const navbar = document.querySelector('.navbar');
+  if (navbar) navbar.hidden = true;
+
+  // Inicializar el toggle de idioma del closed-page
+  const langBtn = document.getElementById('closed-lang-toggle');
+  if (langBtn) {
+    langBtn.querySelectorAll('[data-lang-opt]').forEach(el => {
+      el.classList.toggle('is-active', el.dataset.langOpt === LANG);
+    });
+    langBtn.addEventListener('click', () => {
+      localStorage.setItem('lang', LANG === 'es' ? 'en' : 'es');
+      location.reload();
+    });
+  }
 }
 
 // Ejecutar al cargar
@@ -616,7 +631,7 @@ function mostrarExito() {
 
   const calendarBtn = isApple
     ? `<a href="boda.ics" class="btn btn--apple-cal">${t("success_apple_cal")}</a>`
-    : `<a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+de+Angel+y+Clara&dates=20260716T210000Z/20260717T050000Z&details=%C2%A1Te+esperamos+para+celebrar+nuestra+boda!&location=Garden+Vista+Ballroom,+29+Macarthur+Ave,+Passaic,+NJ+07055" target="_blank" rel="noopener" class="btn btn--google-cal">${t("success_google_cal")}</a>`;
+    : `<a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+de+Angel+y+Clara&dates=20260716T210000Z/20260717T050000Z&details=%C2%A1Te+esperamos+para+celebrar+nuestra+boda!&location=Garden+Vista+Ballroom,+29+Howe+Ave,+Passaic,+NJ+07055" target="_blank" rel="noopener" class="btn btn--google-cal">${t("success_google_cal")}</a>`;
 
   modalContent.innerHTML = `
     <div class="modal__success">
@@ -661,7 +676,7 @@ function mostrarYaConfirmado(nombre) {
 
   const calendarBtn = isApple
     ? `<a href="boda.ics" class="btn btn--apple-cal">${t("success_apple_cal")}</a>`
-    : `<a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+de+Angel+y+Clara&dates=20260716T210000Z/20260717T050000Z&details=%C2%A1Te+esperamos+para+celebrar+nuestra+boda!&location=Garden+Vista+Ballroom,+29+Macarthur+Ave,+Passaic,+NJ+07055" target="_blank" rel="noopener" class="btn btn--google-cal">${t("success_google_cal")}</a>`;
+    : `<a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+de+Angel+y+Clara&dates=20260716T210000Z/20260717T050000Z&details=%C2%A1Te+esperamos+para+celebrar+nuestra+boda!&location=Garden+Vista+Ballroom,+29+Howe+Ave,+Passaic,+NJ+07055" target="_blank" rel="noopener" class="btn btn--google-cal">${t("success_google_cal")}</a>`;
 
   modalContent.innerHTML = `
     <div class="modal__success">

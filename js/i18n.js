@@ -82,7 +82,7 @@ const I18N = {
     closed_kids_label: "Política de Niños",
     closed_kids_value: "Solo adultos",
     closed_kids_sub: "Celebración exclusiva para adultos",
-    closed_venue_address: "29 Macarthur Ave, Passaic, NJ 07055",
+    closed_venue_address: "29 Howe Ave, Passaic, NJ 07055",
 
     // Modal Form
     modal_title: "Confirmación",
@@ -228,7 +228,7 @@ const I18N = {
     closed_kids_label: "Children's Policy",
     closed_kids_value: "Adults only",
     closed_kids_sub: "Adults-only celebration",
-    closed_venue_address: "29 Macarthur Ave, Passaic, NJ 07055",
+    closed_venue_address: "29 Howe Ave, Passaic, NJ 07055",
 
     // Modal Form
     modal_title: "Confirmation",
